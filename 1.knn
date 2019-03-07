@@ -2,6 +2,46 @@
 缺点：时间、空间复杂度较高
 试用：数值型和标称值
 
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.preprocessing import MinMaxScaler
+from sklearn import neighbors
+sns.set()
+path = r"D:\mytest\machinelearninginaction\Ch02\datingTestSet.txt"
+data = pd.read_csv(path,sep='\t')
+data.columns =["road", "percent", "weight", "like"]
+
+y = data.iloc[:,-1]
+
+sns.pairplot(data,hue="like")
+# plt.show()
+data.drop("like",axis=1,inplace=True)
+data = MinMaxScaler().fit_transform(data)
+print(data)
+
+X_train, X_test, y_train, y_test = train_test_split(data, y, test_size=0.3)
+
+'''
+1
+0.95
+3
+0.9666666666666667
+5
+0.9566666666666667
+7
+0.9633333333333334
+9
+0.97
+'''
+
+for i in range(1,10,2):
+    print(i)
+    clf = neighbors.KNeighborsClassifier(n_neighbors=i)
+    clf.fit(X_train,y_train)
+    print(clf.score(X_test,y_test))
 
 
 
