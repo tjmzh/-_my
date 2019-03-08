@@ -1,7 +1,7 @@
 优点：精度高，对异常敏感度低，无输入数据假定
 缺点：时间、空间复杂度较高
 试用：数值型和标称值
-
+#########################约会
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -45,41 +45,59 @@ for i in range(1,10,2):
 
 
 
+#########minst
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.preprocessing import MinMaxScaler
+from sklearn import neighbors
+from sklearn import datasets
+from os import listdir
+sns.set()
 
 
+def img2vec(path):
+    result = np.zeros((1, 1024))
+    fr = open(path)
+    for line in range(32):
+        linestr = fr.readline()
+        for col in range(32):
+            result[0,line*32+col] = int(linestr[col])
+    return result
+##依次读取.txt 分别记录向量和数字
+def gather(path1):
+    Numeber =[]
+    Vector =[]
+    path = listdir(path1)
+    for i in path:
+        path_new = r"D:\mytest\machinelearninginaction\Ch02\trainingDigits" + "\\" + i
+        number = i.split("_")[0]
+        vector = img2vec(path_new)
+        Numeber.append(number)
+        Vector.append(vector)
+
+    return Vector,Numeber
 
 
+train_path = r"D:\mytest\machinelearninginaction\Ch02\trainingDigits"
+test_path = r"D:\mytest\machinelearninginaction\Ch02\testDigits"
 
+a = gather(train_path)
+b = gather(test_path)
+####输出的结果需要处理二维矩阵
+x=[]
+for i in a[0]:
+    x.append(i[0])
+print(a[1])
+print(x)
 
+y=[]
+for j in b[0]:
+    y.append(j[0])
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+clf = neighbors.KNeighborsClassifier()
+clf.fit(x, a[1])
+print(clf.score(y,b[1]))
 
