@@ -83,7 +83,7 @@ def gather(path1):
 
 train_path = r"D:\mytest\machinelearninginaction\Ch02\trainingDigits"
 test_path = r"D:\mytest\machinelearninginaction\Ch02\testDigits"
-
+#################变量名有点随意
 a = gather(train_path)
 b = gather(test_path)
 ####输出的结果需要处理二维矩阵
