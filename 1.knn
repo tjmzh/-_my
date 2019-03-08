@@ -101,3 +101,22 @@ clf = neighbors.KNeighborsClassifier()
 clf.fit(x, a[1])
 print(clf.score(y,b[1]))
 
+for jj,num in enumerate(y):
+    dd = []
+    dd.append(num)
+    cc = clf.predict(dd)
+    print(cc,b[1][jj])
+    
+###############
+0.9799154334038055
+['0'] 0
+['0'] 0
+['0'] 0
+['0'] 0
+['0'] 0
+['0'] 0
+['0'] 0
+['0'] 0
+['0'] 0
+['6'] 0
+['0'] 0
