@@ -2,29 +2,23 @@
 优点：计算复杂度不高，输出易于理解，对缺失值不敏感，可处理不相关特征数据
 缺点：容易过拟合
 
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn import tree
+from sklearn import datasets
+import graphviz
 
+data = datasets.load_iris()
+X_train, X_test, y_train, y_test = train_test_split(data.data, data.target, test_size=0.3)
+clf = tree.DecisionTreeClassifier()
+clf.fit(X_train, y_train)
+print(clf.score(X_test, y_test))
+dot = tree.export_graphviz(clf, out_file=None)
+graph = graphviz.Source(dot)
+graph.render("iris")
 
+D:\Anaconda\python.exe D:/project/numpy_learn.py
+0.9555555555555556
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Process finished with exit code 0
